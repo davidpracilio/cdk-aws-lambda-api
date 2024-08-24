@@ -23,5 +23,12 @@ export class CdkAwsLambdaApiStack extends cdk.Stack {
     // Define the '/hello resource with a GET method
     const helloResource = api.root.addResource('hello');
     helloResource.addMethod('GET');
+
+    // API Gateway URL will be outputted to the CloudFormation stack
+    // Output as a separate stack output
+    new cdk.CfnOutput(this, 'ApiUrl', {
+      value: api.url,
+      description: 'The URL of the API Gateway',
+    });
   }
 }
